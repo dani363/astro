@@ -13,7 +13,7 @@ const en = {
   home: {
     banner: {
       title: `Hello, I'm
-        <span class="text-primary-700 dark:text-neutral-100 font-semibold">Jonathan Bello</span>!`,
+        <span class="text-primary-700 dark:text-neutral-100 font-semibold">Daniel Patiño</span>!`,
       title2: "Software Developer",
       subtitle: "Creating beautiful tech solutions",
       button: "See my projects",
@@ -86,7 +86,7 @@ const en = {
       bio: [
         {
           title: "Name",
-          description: "Jonathan Alexis Bello López",
+          description: "Daniel Patiño",
         },
         {
           title: "Title",
@@ -146,10 +146,10 @@ const en = {
       "A digital browser that blends code, videogames, and education to create experiences that teach and entertain",
     cardCharacter: {
       header: {
-        name: "Jonathan Bello",
+        name: "Daniel Patiño",
         class: "Class: Astronaut Developer",
         level: "Level 25 | Region: Internet",
-        description: `"Jonathan Bello is an artist with passion for knowledge, capable of transforming learning into interactive environments. He believes that learning should feel like unlocking secret achievements."`,
+        description: `"Daniel Patiño is an artist with passion for knowledge, capable of transforming learning into interactive environments. He believes that learning should feel like unlocking secret achievements."`,
       },
       mainStats: {
         language: "Main Language",
@@ -171,11 +171,11 @@ const en = {
       luck: "Luck",
     },
     myHistory: {
-      title: "🗺️ My History",
-      description: `I started this digital journey as someone who starts a new game without a tutorial. From HTML lines to systems with AI, each step was a completed mission. Today, I combine web development, teaching, and educational experiences that are interactive.`,
+      title: "🗺️My History",
+      description: "I started this digital journey as someone who starts a new game without a tutorial. From HTML lines to systems with AI, each step was a completed mission. Today, I combine web development, teaching, and educational experiences that are interactive.",
     },
     myExperience: {
-      title: "💼 My Experience",
+      title: "💼My Experience",
       description: `
         <ul>
           <li>Fullstack Web Developer</li>
@@ -186,7 +186,7 @@ const en = {
       `,
     },
     myVision: {
-      title: "🌌 My Vision",
+      title: "🌌My Vision",
       description:
         "My goal is to merge technology, storytelling, and education to make programming as epic as winning the favorite video game final. I am committed to creating environments where learning feels like playing, and I seek to improve my skills and learn new technologies to achieve this goal.",
     },
@@ -204,7 +204,7 @@ const en = {
     infoContact: {
       title: "Contact Information",
       emailTitle: "Email",
-      emailValue: "jonathanbello@gmail.com",
+      emailValue: "danielpatino@gmail.com",
       locationTitle: "Location",
       locationValue: "Puebla, Mexico",
       phoneTitle: "Phone",

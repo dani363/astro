@@ -13,7 +13,7 @@ const es = {
   home: {
     banner: {
       title: `¡Hola, soy
-                <span class="text-primary-700 dark:text-neutral-100 font-semibold">Jonathan Bello</span>!`,
+                <span class="text-primary-700 dark:text-neutral-100 font-semibold">Daniel Patiño</span>!`,
       title2: "Desarrollador de Software",
       subtitle: "Creando soluciones tecnológicas llenas de belleza",
       button: "Mira mis proyectos",
@@ -86,7 +86,7 @@ const es = {
       bio: [
         {
           title: "Nombre",
-          description: "Jonathan Alexis Bello López",
+          description: "Daniel Patiño",
         },
         {
           title: "Titulo",
@@ -142,15 +142,15 @@ const es = {
     },
   },
   about: {
-    title: " ⚔️ Sobre Mi",
+    title: " ⚔️Sobre Mi",
     description:
       "Un explorador digital que mezcla código, videojuegos y educación para crear experiencias que enseñan y emocionan",
     cardCharacter: {
       header: {
-        name: "Jonathan Bello",
+        name: "Daniel Patiño",
         class: "Clase: Dev del Astronómico",
         level: "Nivel 25 | Región: Internet",
-        description: `"Jonathan Bello es un dev-artesano con pasión por el conocimiento, capaz
+        description: `"Daniel Patiño es un dev-artesano con pasión por el conocimiento, capaz
       de transformar aulas en arenas interactivas. Cree que aprender debe
       sentirse como desbloquear logros secretos."`,
       },
@@ -191,7 +191,7 @@ const es = {
     myVision: {
       title: "🌌 Visión",
       description:
-        "Mi meta es fusionar tecnología, narrativa y pedagogía para que programar sea tan épico como vencer al jefe final de tu videojuego favorito. Estoy comprometido con la creación de entornos donde aprender se sienta como jugar, y busco la forma de mejorar mis habilidades y aprender nuevas tecnologías para lograr este objetivo.",
+        "Mi meta es fusionar tecnología, narrativa y pedagogía para que programar sea tan ��pico como vencer al jefe final de tu video promedio. Estoy comprometido con la creación de entornos donde aprender se sienta como jugar, y busco la forma de mejorar mis habilidades y aprender nuevas tecnologías para lograr este objetivo.",
     },
   },
   contact: {
@@ -207,7 +207,7 @@ const es = {
     infoContact: {
       title: "Información de Contacto",
       emailTitle: "Email",
-      emailValue: "jonathanbello@gmail.com",
+      emailValue: "danielpatino@gmail.com",
       locationTitle: "Ubicación",
       locationValue: "Puebla, México",
       phoneTitle: "Teléfono",
