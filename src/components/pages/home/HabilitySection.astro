@@ -1,0 +1,41 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import HabilityCard from "@components/cards/HabilityCard.astro";
+
+import { ComputerDesktopIcon, ServerIcon, SwatchIcon } from "@heroicons/react/24/outline";
+---
+
+<!-- Hability -->
+<section
+  class="container py-16 sm:py-20 lg:py-24 xl:py-32 px-4 lg:px-0
+    grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12"
+>
+  <h2
+    class="text-center font-title font-semibold text-3xl lg:text-4xl lg:text-[40px]
+    lg:col-span-3"
+  >
+    {t("home.hability.title")}
+  </h2>
+
+  <HabilityCard
+    title={t("home.hability.card1.title")}
+    icon={ComputerDesktopIcon}
+    description={t("home.hability.card1.description")}
+  />
+
+  <HabilityCard
+    title={t("home.hability.card2.title")}
+    icon={ServerIcon}
+    description={t("home.hability.card2.description")}
+  />
+
+  <HabilityCard
+    title={t("home.hability.card3.title")}
+    icon={SwatchIcon}
+    description={t("home.hability.card3.description")}
+  />
+</section>

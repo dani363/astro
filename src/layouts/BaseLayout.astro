@@ -1,0 +1,96 @@
+---
+import "../styles/global.css";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+import { getLangFromUrl } from "../i18n/utils";
+import { ClientRouter } from "astro:transitions";
+import { SEO } from "astro-seo";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang} class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title + " | Jonathan Bello"}</title>
+
+    <SEO
+      title={title}
+      description="Jonathan Bello - Desarrollador Frontend"
+      openGraph={{
+        basic: {
+          title: "Jonathan Bello - Desarrollador Frontend",
+          type: "website",
+          image: "/assets/brand/me.png",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        site: "@JonathanBello",
+        creator: "@JonathanBello",
+        title: "Jonathan Bello - Desarrollador Frontend",
+        description: "Jonathan Bello - Desarrollador Frontend",
+        image: "/assets/brand/me.png",
+      }}
+    />
+
+    <ClientRouter />
+    <script is:inline src="https://www.google.com/recaptcha/api.js"></script>
+
+    <!-- Pixel -->
+    <!-- GTM -->
+  </head>
+  <body
+    class="flex flex-col min-h-screen bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-100"
+  >
+    <Header />
+    <main class="flex-1 w-full mx-auto pt-16 flex flex-col items-center">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  // Inyectar clase dark si se uso el modo oscuro usando ViewTransitions
+  function setDarkMode(document: Document) {
+    const html = document.querySelector("html");
+    if (!html) return;
+    html.classList.add("dark");
+  }
+
+  document.addEventListener("astro:before-swap", (ev) => {
+    // Obtener el elemento html del documento actual
+    const html = document.querySelector("html");
+    // Detectar si tiene la clase dark
+    const isDark = html?.classList.contains("dark");
+
+    if (isDark) {
+      setDarkMode(ev.newDocument);
+    }
+  });
+</script>

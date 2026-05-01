@@ -1,0 +1,15 @@
+---
+const res = await fetch("https://api.api-ninjas.com/v1/quotes", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "X-API-Key": "8JFgKcEoK3dOYFmbr6rFpA==iANBft3xm7g1m6h5",
+  },
+});
+
+const data = await res.json();
+
+const quote = data[0].quote;
+---
+
+<p>{quote}</p>

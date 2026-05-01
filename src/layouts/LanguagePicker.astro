@@ -1,0 +1,26 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const url = new URL(Astro.url);
+const actualPath = url.pathname;
+
+// Si el actual path es por ejemplo /en/blog cambiar el path a /blog
+const actualPathWithoutLang = actualPath.replace(`/${lang}`, "");
+---
+
+<a
+  href={translatePath(actualPathWithoutLang, lang === "es" ? "en" : "es")}
+  class="rounded-full flex items-center justify-center size-8 bg-neutral-100 dark:bg-neutral-400 hover:cursor-pointer"
+>
+  <span
+    class="text-neutral-500 dark:text-neutral-50 font-text text-base font-bold"
+  >
+    {lang === "es" ? "EN" : "ES"}
+  </span>
+</a>

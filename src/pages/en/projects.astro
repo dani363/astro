@@ -1,0 +1,24 @@
+---
+import ProjectsPage from "@components/pages/ProjectsPage.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import { getCollection } from "astro:content";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allProjects = await getCollection("projects");
+const currentProjects = allProjects.filter((project) =>
+  project.slug.startsWith(`${lang}/`)
+);
+---
+
+<BaseLayout title="Projects">
+  <ProjectsPage projects={currentProjects} />
+</BaseLayout>

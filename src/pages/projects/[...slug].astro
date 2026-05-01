@@ -1,0 +1,18 @@
+---
+import ProjectPage from "@components/pages/ProjectPage.astro";
+import { getEntry, render } from "astro:content";
+
+const { slug } = Astro.params;
+
+const project = await getEntry("projects", `es/${slug}`);
+
+if (!project) {
+  return Astro.redirect("/404.astro");
+}
+
+const { Content, headings } = await render(project);
+---
+
+<ProjectPage project={project}>
+  <Content />
+</ProjectPage>

@@ -1,0 +1,23 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#e21513",
+    "activityBar.background": "#e21513",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#11ce13",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#e21513",
+    "statusBar.background": "#b3110f",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#e21513",
+    "statusBarItem.remoteBackground": "#b3110f",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#b3110f",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#b3110f99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#b3110f",
+  "cSpell.words": ["Teziutlán"]
+}

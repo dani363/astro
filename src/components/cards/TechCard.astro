@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  img: ImageMetadata;
+}
+
+const { title, img } = Astro.props;
+---
+
+<article class="flex flex-col items-center justify-center w-28">
+  <div
+    class="relative flex items-center justify-center mb-2 size-24 shine-container"
+  >
+    <svg
+      class="absolute -z-10 top-0 left-0 right-0"
+      width="98"
+      height="98"
+      viewBox="0 0 98 98"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#filter0_dd_1596_738)">
+        <path
+          class="fill-neutral-100 dark:fill-neutral-600"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M49.7082 1.7736C58.67 -0.329119 68.5473 1.95941 76.1666 7.36634C83.7261 12.7309 87.6958 21.9729 90.8731 30.9856C93.8783 39.5103 96.6241 48.9229 93.8525 57.5354C91.2047 65.7635 84.7086 71.7979 78.0131 76.8518C72.6396 80.9079 67.8671 84.0731 61.7826 86.788C54.7717 89.9162 45.3895 94.8868 38.0978 92.5827C30.7994 90.2765 24.1646 84.3492 18.8125 78.625C12.8877 72.2883 8.78855 65.701 5.35818 57.5667C1.77303 49.0653 2.22377 38.0488 7.06725 30.2738C11.8329 22.6238 16.5162 18.1163 23.8438 13.2188C31.0979 8.37026 41.3272 3.74006 49.7082 1.7736Z"
+          fill="#E7E7E7"></path>
+      </g>
+      <defs>
+        <filter
+          id="filter0_dd_1596_738"
+          x="0"
+          y="-1"
+          width="98"
+          height="98.1729"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"></feColorMatrix>
+          <feOffset dy="1"></feOffset>
+          <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"></feColorMatrix>
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_1596_738"></feBlend>
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"></feColorMatrix>
+          <feOffset dy="1"></feOffset>
+          <feGaussianBlur stdDeviation="1.5"></feGaussianBlur>
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
+          <feBlend
+            mode="normal"
+            in2="effect1_dropShadow_1596_738"
+            result="effect2_dropShadow_1596_738"></feBlend>
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect2_dropShadow_1596_738"
+            result="shape"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+
+    <Image src={img} alt={title} class="w-16 h-16" />
+  </div>
+
+  <b class="text-center font-title font-semibold text-base mb-4">
+    {title}
+  </b>
+</article>

@@ -1,0 +1,34 @@
+---
+import ProjectsPage from "@components/pages/ProjectsPage.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import { getCollection } from "astro:content";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+
+const { category } = Astro.params;
+const categories = await getCollection("categoriesProjects");
+
+if (!categories.find((cat) => cat.data.id === category)) {
+  return Astro.redirect("/404");
+}
+
+// Forma obtima de obtener los proyectos de un idioma mediante su ruta
+const allProjects = await getCollection("projects", ({ id }) => {
+  return id.startsWith(lang);
+});
+
+const projects = allProjects.filter((project) =>
+  project.data.category.find((cat) => cat.id === category)
+);
+---
+
+<BaseLayout title="Proyectos">
+  <ProjectsPage projects={projects} />
+</BaseLayout>

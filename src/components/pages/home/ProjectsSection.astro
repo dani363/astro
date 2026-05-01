@@ -1,0 +1,38 @@
+---
+import Button from "@components/buttons/Button.astro";
+import ProjectCard from "@components/cards/ProjectCard.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+import { getCollection } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const currentProjects = await getCollection("projects", ({ id, data }) => {
+  return id.startsWith(lang) && data.isRelevant == true;
+});
+---
+
+<section class="container px-4 lg:px-0 py-16 sm:py-20 lg:py-24">
+  <h2
+    class="text-center font-title font-semibold text-3xl lg:text-4xl lg:text-[40px] mb-6 lg:mb-10"
+  >
+    {t("home.projects.title")}
+  </h2>
+
+  <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    {currentProjects.map((project) => <ProjectCard project={project} />)}
+  </div>
+
+  <div class="flex justify-center mt-8">
+    <Button
+      text={t("home.projects.btn")}
+      size="md"
+      href={translatePath("/projects")}
+    />
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import { Image } from "astro:assets";
+import MyImage from "@assets/brand/me.svg";
+import CharacterCard from "./about/CharacterCard.astro";
+import Stats from "./about/Stats.astro";
+import AboutCard from "@components/cards/AboutCard.astro";
+---
+
+<section class={`container px-4 lg:px-0 py-16 `}>
+  <div class={`max-w-5xl mx-auto`}>
+    <!-- Hero estilo menú de videojuego -->
+    <header class={`text-center mb-8`}>
+      <h1
+        class={`text-4xl lg:text-5xl font-title font-bold text-neutral-900 dark:text-neutral-100 mb-4`}
+      >
+        {t("about.title")}
+      </h1>
+      <p class={`text-lg text-neutral-800 dark:text-neutral-300`}>
+        {t("about.description")}
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Avatar flotante 3D -->
+      <CharacterCard />
+
+      <Stats />
+
+      <!-- Tarjetas estilo stats de personaje -->
+      <div
+        class={`grid grid-cols-1 md:grid-cols-3 md:col-span-2 lg:col-span-3 gap-8`}
+      >
+        <!-- Historia -->
+        <AboutCard
+          title={t("about.myHistory.title")}
+          description={t("about.myHistory.description")}
+        />
+
+        <!-- Experiencia -->
+        <AboutCard
+          title={t("about.myExperience.title")}
+          description={t("about.myExperience.description")}
+        />
+
+        <!-- Visión -->
+        <AboutCard
+          title={t("about.myVision.title")}
+          description={t("about.myVision.description")}
+        />
+      </div>
+    </div>
+  </div>
+</section>

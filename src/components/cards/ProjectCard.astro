@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+import type { CollectionEntry } from "astro:content";
+import ButtonCategory from "@components/buttons/ButtonCategory.astro";
+import { getEntries } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+
+// Obtener categorías del proyecto
+const categories = await getEntries(project.data.category);
+
+const projectIdCleaned = project.slug.replace(`${lang}/`, "");
+---
+
+<article
+  class="inline-block bg-neutral-50 dark:bg-neutral-900 shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+>
+  <div class="flex flex-col">
+    <a
+      href={translatePath(`/projects/${projectIdCleaned}`)}
+      class="hover:cursor-pointer"
+    >
+      <Image
+        src={project.data.cover}
+        alt={project.data.title}
+        class="w-full h-48 object-cover rounded-t-lg"
+      />
+      <div class="p-4">
+        <!-- Dejar espacio reservado para dos lineas de texto y si se pasa cortarlo con puntos -->
+        <h3
+          class="font-title text-lg font-semibold text-neutral-900 dark:text-neutral-100
+        line-clamp-1 overflow-hidden"
+        >
+          {project.data.title}
+        </h3>
+        <!-- Si se pasa de 3 lineas cortar la descripción -->
+        <p class="text-neutral-700 dark:text-neutral-200 mt-2 line-clamp-3">
+          {project.data.description}
+        </p>
+      </div>
+    </a>
+
+    <div class="p-4 flex items-start justify-start gap-2 flex-wrap">
+      {
+        categories.map((category) => (
+          <ButtonCategory
+            id={category.data.id}
+            title={category.data.name}
+            link={`/projects/category/${category.data.id}`}
+            color={category.data.color}
+          />
+        ))
+      }
+    </div>
+  </div>
+</article>

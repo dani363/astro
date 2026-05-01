@@ -1,0 +1,56 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BannerSmall from "@components/banners/BannerSmall.astro";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+} from "@i18n/utils";
+import ButtonCategory from "@components/buttons/ButtonCategory.astro";
+import type { CollectionEntry } from "astro:content";
+import ProjectCard from "@components/cards/ProjectCard.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const categories = await getCollection("categoriesProjects");
+
+// Pasamos los proyectos de forma dinamica.
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+---
+
+<BannerSmall title={t("projects.banner.title")} />
+
+<section
+  class="container px-4 lg:px-0 py-16 sm:py-20 lg:py-24
+  grid grid-cols-1 lg:grid-cols-5 gap-4"
+>
+  <div class="flex flex-col gap-2">
+    <h3
+      class="font-title text-lg font-semibold text-gray-900 dark:text-gray-100"
+    >
+      {t("projects.categories.title")}
+    </h3>
+
+    {
+      categories.map((category) => (
+        <ButtonCategory
+          id={category.data.id}
+          title={category.data.name}
+          link={`/projects/category/${category.data.id}`}
+          color={category.data.color}
+        />
+      ))
+    }
+  </div>
+
+  <div class="col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+</section>
+
+<style></style>

@@ -1,0 +1,104 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+import { Image } from "astro:assets";
+import imgMe from "@assets/brand/me.svg";
+
+import svgAstro from "@assets/logos/logoAstro.svg";
+import svgGolangLogo from "@assets/logos/logoGolang-gopher.svg";
+import svgNextLogo from "@assets/logos/logoNext.svg";
+import svgFigmaLogo from "@assets/logos/logoFigma.svg";
+import svgTailwindLogo from "@assets/logos/logoTailwind.svg";
+import svgReactNativeLogo from "@assets/logos/logoReact.svg";
+import TechCard from "@components/cards/TechCard.astro";
+import ServerQuote from "@components/cards/ServerQuote.astro";
+---
+
+<!-- About me -->
+<section class="container px-4 lg:px-0 py-16 sm:py-20 lg:py-24 mb-10 xl:py-32">
+  <h2
+    class="text-center font-title font-semibold text-3xl lg:text-4xl lg:text-[40px] mb-8 lg:mb-10"
+  >
+    {t("home.about.title")}
+  </h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-8 items-center">
+    <div class="overflow-clip">
+      <div class="relative mb-8 lg:mb-0
+      flex items-center justify-center">
+        <Image src={imgMe} alt="Yo" class="lg:w-full lg:max-w-96" />
+        <svg
+          class="absolute
+        bottom-1 left-auto right-auto -z-10
+        lg:top-auto lg:left-auto lg:right-auto
+        w-full max-w-[392px] max-h-[354px]"
+          viewBox="0 0 392 354"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="fill-neutral-100 dark:fill-neutral-600"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M204.113 7.22209C243.304 11.3782 282.117 16.9324 312.317 42.2543C345.513 70.089 365.88 108.094 374.941 150.458C387.052 207.087 408.5 266 371.189 317.533C331.895 371.805 271 356.552 204.113 356.552C132.143 356.552 49.664 371 24 317.533C-3.24249e-05 267.533 -3.14782 206.138 0.533021 150.458C3.983 98.2692 27.4627 46.6787 70.2383 16.5825C108.272 -10.1771 157.869 2.31797 204.113 7.22209Z"
+            fill="#D1D1D1"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="lg:-order-1">
+      <ul class="flex flex-col gap-4">
+        {
+          t("home.about.bio").map(
+            (item: { title: string; description: string }) => (
+              <li class="mb-2 font-text">
+                <p class="inline-block text-base">
+                  <b class="inline-block font-semibold text-base">
+                    {item.title}:
+                  </b>
+                  {item.description}
+                </p>
+              </li>
+            )
+          )
+        }
+
+        <li>
+          <ServerQuote server:defer>
+            <p class="h-12" slot="fallback">Loading...</p>
+          </ServerQuote>
+        </li>
+      </ul>
+    </div>
+
+    <div class="">
+      <h3 class="text-center font-title font-semibold text-2xl mb-4">
+        {t("home.about.titleStack")}
+      </h3>
+
+      <ul class="grid grid-cols-2 place-items-center gap-2 px-8 xl:px-24">
+        <li>
+          <TechCard title="Astro.js" img={svgAstro} />
+        </li>
+        <li>
+          <TechCard title="Next.js" img={svgNextLogo} />
+        </li>
+        <li>
+          <TechCard title="Tailwind" img={svgTailwindLogo} />
+        </li>
+        <li>
+          <TechCard title="GoLang" img={svgGolangLogo} />
+        </li>
+
+        <li>
+          <TechCard title="Figma" img={svgFigmaLogo} />
+        </li>
+
+        <li>
+          <TechCard title="React Native" img={svgReactNativeLogo} />
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

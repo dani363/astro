@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  icon: any;
+  description: string;
+}
+
+const { title, icon: Icon, description } = Astro.props;
+---
+
+<div class="flex flex-col items-center gap-3">
+  <div class="relative w-16 h-16 flex items-center justify-center">
+    <svg
+      class="absolute"
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M32.4927 0.538159C38.727 -0.924604 45.5981 0.667415 50.8985 4.42876C56.1573 8.1606 58.9188 14.5898 61.1291 20.8595C63.2197 26.7898 65.1298 33.3377 63.2017 39.329C61.3598 45.0529 56.8408 49.2507 52.1831 52.7665C48.445 55.5881 43.125 55.79 38.8922 57.6786C34.0151 59.8547 29.4883 65.3125 24.4159 63.7097C19.3387 62.1054 16.7232 55.982 13 52C8.87841 47.5918 4.02682 45.0094 1.64047 39.3507C-0.853542 33.4368 -0.539986 25.7731 2.82939 20.3644C6.14462 15.0426 11.4026 13.907 16.5 10.5C21.5464 7.12714 26.6624 1.90613 32.4927 0.538159Z"
+        fill="#BE110F"></path>
+    </svg>
+
+    <Icon className="z-10 text-neutral-50 size-10" />
+  </div>
+  <h3
+    class="text-neutral-950 dark:text-neutral-100
+    font-title font-semibold text-center text-2xl lg:text-3xl"
+  >
+    {title}
+  </h3>
+  <p
+    class="font-text text-neutral-900 dark:text-neutral-200
+    text-center text-sm sm:text-base leading-loose"
+  >
+    {description}
+  </p>
+</div>
+
+<style></style>

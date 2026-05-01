@@ -1,0 +1,34 @@
+---
+// Obtener la IP del usuario desde los headers del request
+const forwarded = Astro.request.headers.get("x-forwarded-for") || "";
+const ip = forwarded.split(",")[0].trim() || "8.8.8.8";
+console.log(ip);
+
+// Obtener la geolocalizacion de la IP del usuario localhost
+const res = await fetch("https://ipinfo.io/json");
+const geo = await res.json();
+console.log(geo);
+
+// Obtener la geolocalizacion de la IP del usuario en produccion
+// const res = await fetch(`https://ipinfo.io/${ip}/json`);
+// const geo = await res.json();
+// console.log(geo);
+
+const countryCode = geo.country || "PE";
+---
+
+<div class="flag-avatar">
+  <img
+    src={`https://flagsapi.com/${countryCode}/flat/64.png`}
+    alt="Bandera"
+    class="w-12 h-12"
+  />
+
+  <input type="hidden" name="country" value={countryCode} />
+</div>
+
+<style>
+  .flag-avatar {
+    display: inline-block;
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  percentage: number;
+}
+
+const { title, percentage } = Astro.props;
+---
+
+<div>
+  <div class="flex justify-between mb-1 font-text">
+    <span class="text-neutral-800 dark:text-neutral-100 font-medium"
+      >{title}</span
+    >
+    <span class="text-sm text-primary-600 dark:text-primary-300"
+      >{percentage}%</span
+    >
+  </div>
+  <div
+    class="w-full bg-neutral-300 dark:bg-neutral-700 h-5 rounded-lg overflow-hidden relative"
+  >
+    <!-- Barra base con fill y bounce -->
+    <div
+      class="h-full bg-primary-600 dark:bg-primary-400 animate-fill-bounce"
+      style={`--bar-width: ${percentage}%;`}
+    >
+    </div>
+    <!-- Capa shimmer encima -->
+    <div
+      class="absolute inset-0 bg-shimmer animate-shimmer"
+      style={`--bar-width: ${percentage}%;`}
+    >
+    </div>
+  </div>
+</div>

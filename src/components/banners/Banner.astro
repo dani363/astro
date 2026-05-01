@@ -1,0 +1,149 @@
+---
+import { Image } from "astro:assets";
+import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
+import { getCollection } from "astro:content";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Obtener el último proyecto
+const projects = await getCollection("projects", ({ id }) => {
+  return id.startsWith(lang);
+});
+
+const latestProject = projects.sort((a, b) => {
+  return (
+    new Date(b.data.publishDate).getTime() -
+    new Date(a.data.publishDate).getTime()
+  );
+})[0];
+
+const projectIdCleaned = latestProject ? latestProject.slug.replace(`${lang}/`, "") : "";
+
+---
+
+<section
+  class="relative h-auto w-full grid justify-center
+  bg-neutral-50 dark:bg-primary-700"
+>
+  <svg
+    class="absolute -top-10 -left-10"
+    width="100"
+    height="100"
+    viewBox="0 0 200 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="100" cy="100" r="100" fill="#A31311"></circle>
+  </svg>
+
+  <div
+    class="container grid lg:grid-cols-2 gap-8 sm:gap-8 md:gap-12
+    px-8 py-16 sm:pt-16 lg:py-20 xl:py-32 lg:px-0
+   items-center"
+  >
+    <div
+      class="flex flex-col gap-6 sm:gap-9 lg:gap-16
+    items-center lg:items-start lg:justify-start z-10"
+    >
+      <!-- Titulo -->
+      <h1 class="font-title leading-tight w-full">
+        <span
+          class="inline-block font-text text-start text-lg sm:text-xl lg:text-2xl
+          mb-4 md:mb-4 lg:mb-8 text-neutral-950 dark:text-neutral-100"
+          set:html={t("home.banner.title")}
+        />
+        <span
+          class="inline-block font-title font-semibold text-center lg:text-start
+        text-4xl text-[40px] sm:text-5xl md:text-6xl xl:text-7xl
+        w-full text-neutral-950 dark:text-neutral-100"
+        >
+          {t("home.banner.title2")}
+        </span>
+      </h1>
+
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 bg-primary-700 dark:bg-neutral-900 text-neutral-100
+      px-5 py-2 rounded-lg font-semibold font-text text-lg lg:text-xl
+      transition-all duration-300 hover:bg-primary-900 dark:hover:bg-neutral-950 mx-auto md:mx-0 w-fit
+      transform hover:scale-105"
+      >
+        <span class="h-8 grid place-items-center">
+          {t("home.banner.button")}
+        </span>
+        <ArrowRightCircleIcon className="h-8 w-8" />
+      </a>
+    </div>
+
+    <div>
+      <div
+        class="flex items-center justify-center lg:justify-end w-full h-full z-10 mb-8 lg:mb-10"
+      >
+        {
+          latestProject && (
+            <div class="relative inline-block perspective-distant z-10">
+              {/* Anillo del suelo */}
+              <span class="animate-ping-ring" />
+              <a
+                href={translatePath(`/projects/${projectIdCleaned}`)}
+                class={`inline-block
+
+                  transform transform-3d backface-hidden perspective-distant
+                  animate-float-swing-3d drop-glow`}
+              >
+                {/* Imagen del proyecto */}
+                <Image
+                  src={latestProject.data.cover}
+                  alt={`Banner del proyecto ${latestProject.data.title}`}
+                  class={`
+                  w-full max-w-2xl max-h-[400px] aspect-video
+                  object-cover rounded-2xl shadow-lg
+                `}
+                />
+              </a>
+            </div>
+          )
+        }
+      </div>
+
+      <h2
+        class="text-neutral-100 text-right relative
+      text-xl lg:text-2xl font-title font-semibold z-10 w-9/10 justify-self-end"
+      >
+        {t("home.banner.subtitle")}
+      </h2>
+    </div>
+  </div>
+
+  <svg
+    class="absolute bottom-0 right-0 w-10/11 lg:hidden"
+    viewBox="0 0 424 228"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M106.5 22.0001C173.5 16.4826 212.075 41.0991 264 37.5C323.224 33.395 393.096 -15.3133 424 6.00009C424 86.4481 424 228 424 228C424 228 411 228 25.0001 228C-5.49998 228 -7.7464 120.106 18.5 70.5001C32.5001 41.0001 64 25.5 106.5 22.0001Z"
+      fill="#BE110F"></path>
+  </svg>
+
+  <svg
+    class="hidden absolute bottom-0 right-0 lg:block h-full w-7/12 xl:w-6/10"
+    viewBox="0 0 893 650"
+    preserveAspectRatio="none"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      class="dark:fill-neutral-950"
+      d="M893 650C781.577 650 79.5 649.5 0 650C-2.77421e-10 443.5 63.8743 492.481 105 380.5C146.5 267.5 166.997 154.326 288 99C393.305 50.852 479.239 122.942 584.5 99C761.413 58.7598 815.533 0.5 893 0.5C893 133.5 893 492 893 650Z"
+      fill="#BE110F"></path>
+  </svg>
+</section>

@@ -1,0 +1,194 @@
+---
+import { db, eq, Comment, Author } from "astro:db";
+import EntryLayout from "@layouts/EntryLayout.astro";
+import FlagAvatar from "@components/avatars/FlagAvatar.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { project } = Astro.props;
+// Consulta de tabla
+// Consultar solo los comentarios del post
+let comentarios = await db
+  .select()
+  .from(Comment)
+  .where(eq(Comment.postId, project.data.id));
+
+let authores = await db.select().from(Author);
+
+// console.log(comentarios);
+// console.log(authores);
+
+// Insertar datos apartir de un form
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const comment = formData.get("comment");
+  const name = formData.get("name");
+  const country = formData.get("country");
+
+  if (!comment || !name || !country) {
+    return Astro.redirect("/404.astro");
+  }
+
+  // TODO: Logica de creacion de id dinamico y seguro
+  const idAuthor = Math.floor(Math.random() * 1000);
+
+  const authorTemp = {
+    id: idAuthor,
+    name: name.toString(),
+    country: country.toString(),
+  };
+
+  const response = await db.insert(Author).values(authorTemp);
+
+  if (!response) {
+    return Astro.redirect("/404.astro");
+  } else {
+    console.log(response);
+    await db.insert(Comment).values({
+      authorId: idAuthor,
+      postId: project.data.id,
+      body: comment.toString(),
+    });
+  }
+
+  // Redireccionar a la misma pagina para evitar el reenvío del formulario
+  Astro.redirect("/project/" + project.data.id);
+}
+
+// Volver a consultar los comentarios y autores
+comentarios = await db
+  .select()
+  .from(Comment)
+  .where(eq(Comment.postId, project.data.id));
+
+authores = await db.select().from(Author);
+---
+
+<EntryLayout entry={project.data}>
+  <slot />
+
+  <!-- Obtener los comentarios del post de astrodb -->
+
+  <!-- Formulario para comentarios -->
+  <section
+    class="comments-section w-full max-w-2xl mx-auto px-4 py-10"
+    slot="footer"
+  >
+    <div class="mb-12 flex flex-col gap-4">
+      {
+        comentarios.map(async (comentario) => {
+          const author = await authores.find(
+            (author) => author.id === comentario.authorId
+          );
+
+          return (
+            <div class="flex items-center justify-start space-x-4 bg-neutral-100 dark:bg-neutral-900 p-4 rounded-lg shadow-md">
+              <div class="flex-shrink-0">
+                <img
+                  src={`https://flagsapi.com/${author?.country}/flat/64.png`}
+                  alt="Bandera"
+                  class="w-12 h-12"
+                />
+              </div>
+              <div>
+                <b>{author?.name}</b>
+                <p class="text-neutral-900  dark:text-neutral-100 font-medium">
+                  {comentario.body}
+                </p>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-6">
+      {t("project.comments.title")}
+    </h2>
+
+    <form
+      method="post"
+      id="commentForm"
+      class="space-y-6 bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-md"
+    >
+      <div class="flex flex-row items-center gap-4 mb-4">
+        <FlagAvatar server:defer>
+          <div
+            slot="fallback"
+            class="w-12 h-12 bg-nuetral-100 dark:bg-neutral-800 rounded-full"
+          >
+          </div>
+        </FlagAvatar>
+        <label
+          for="name"
+          class="flex-1 block text-sm font-medium text-neutral-700 dark:text-neutral-200 mb-1"
+        >
+          {t("project.comments.name")}:
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 transition duration-200"
+          />
+        </label>
+      </div>
+
+      <div>
+        <label
+          for="comment"
+          class="block text-sm font-medium text-neutral-700 dark:text-neutral-200 mb-1"
+        >
+          {t("project.comments.comment")}:
+        </label>
+        <textarea
+          id="comment"
+          name="comment"
+          rows="4"
+          required
+          class="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 transition duration-200 resize-y"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-primary-800 dark:bg-neutral-200 text-white dark:text-neutral-900 font-semibold px-6 py-2 rounded-md hover:bg-primary-700 dark:hover:bg-neutral-100 transition duration-200"
+      >
+        {t("project.comments.send")}
+      </button>
+    </form>
+  </section>
+</EntryLayout>
+
+<script></script>
+
+<style>
+  .project-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .project-content {
+    margin-bottom: 2rem;
+  }
+
+  .comments-section {
+    margin-top: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  input,
+  textarea,
+  button {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+</style>

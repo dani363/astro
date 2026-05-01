@@ -1,0 +1,51 @@
+---
+import {
+  ComputerDesktopIcon,
+  DevicePhoneMobileIcon,
+  ServerIcon,
+  PuzzlePieceIcon,
+  SwatchIcon,
+} from "@heroicons/react/24/outline";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const categoriesIcons = {
+  web: ComputerDesktopIcon,
+  mobile: DevicePhoneMobileIcon,
+  backend: ServerIcon,
+  games: PuzzlePieceIcon,
+  ui: SwatchIcon,
+};
+
+type Props = {
+  id: string;
+  title: string;
+  link: string;
+  color: string;
+};
+
+const { id, title, link, color } = Astro.props;
+
+// Normalizamos el título (opcional: todo minúsculas, sin espacios, etc.)
+const iconKey = id
+  .toLowerCase()
+  .replace(/\s+/g, "") as keyof typeof categoriesIcons;
+const Icon = categoriesIcons[iconKey];
+---
+
+<a
+  href={translatePath(link)}
+  class={`flex items-center justify-center gap-3 px-4 py-2 rounded-full max-w-40
+  font-text font-medium text-neutral-600 dark:text-neutral-950 transition-transform transform hover:scale-105`}
+  style={`background-color: ${color};`}
+>
+  {Icon && <Icon className="w-5 h-5 text-neutral-600 dark:text-neutral-950" />}
+  <span>{title}</span>
+</a>

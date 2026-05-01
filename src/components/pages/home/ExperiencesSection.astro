@@ -1,0 +1,49 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import ExperiencesCard from "@components/cards/ExperiencesCard.astro";
+
+import logoYGU from "@assets/logos/logoYGU.svg";
+import logoTec from "@assets/logos/IconTEC.svg";
+import logoEDteam from "@assets/logos/logoEDteam.svg";
+import logoAppDeux from "@assets/logos/logoAppDeux.svg";
+---
+
+<!-- Experiences -->
+<section class="container px-4 lg:px-0 py-16 sm:py-20 lg:py-24">
+  <h2
+    class="text-center font-title font-semibold text-3xl lg:text-4xl lg:text-[40px] mb-6 lg:mb-10"
+  >
+    {t("home.experience.title")}
+  </h2>
+
+  <div
+    class="flex flex-col lg:flex-row items-center justify-center flex-wrap
+      gap-8 sm:gap-8 md:gap-12"
+  >
+    <ExperiencesCard
+      titulo={t("home.experience.card0.title")}
+      fechaDeTrabajo={t("home.experience.card0.duration")}
+      rol={t("home.experience.card0.role")}
+      iconoEmpresa={logoTec}
+      funciones={t("home.experience.card0.funciones")}
+    />
+    <ExperiencesCard
+      titulo={t("home.experience.card1.title")}
+      fechaDeTrabajo={t("home.experience.card1.duration")}
+      rol={t("home.experience.card1.role")}
+      iconoEmpresa={logoYGU}
+      funciones={t("home.experience.card1.funciones")}
+    />
+    <ExperiencesCard
+      titulo={t("home.experience.card2.title")}
+      fechaDeTrabajo={t("home.experience.card2.duration")}
+      rol={t("home.experience.card2.role")}
+      iconoEmpresa={logoAppDeux}
+      funciones={t("home.experience.card2.funciones")}
+    />
+  </div>
+</section>

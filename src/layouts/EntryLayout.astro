@@ -1,0 +1,48 @@
+---
+import type { ImageMetadata } from "astro";
+import BaseLayout from "./BaseLayout.astro";
+import { getLangFromUrl } from "@i18n/utils";
+import { Image } from "astro:assets";
+import Prose from "./Prose.astro";
+
+interface entry {
+  title: string;
+  description: string;
+  cover: ImageMetadata;
+  date: Date;
+}
+
+interface Props {
+  entry: entry;
+}
+
+const { entry } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+
+const formattedDate = new Intl.DateTimeFormat(lang, {
+  dateStyle: "long",
+}).format(entry.date);
+---
+
+<BaseLayout title={entry.title}>
+  <section class="bg-neutral-100 dark:bg-neutral-950 rounded-2xl py-12 container mb-12">
+    <Image
+      class="w-full aspect-video object-cover h-96 lg:h-[30rem] xl:h-[36rem] rounded-2xl mb-8"
+      src={entry.cover}
+      alt={entry.title}
+    />
+    <h1 class="text-center font-title font-semibold text-4xl lg:text-5xl mb-8">
+      {entry.title}
+    </h1>
+
+    <p class="text-center font-title text-xl">{formattedDate}</p>
+  </section>
+  <hr />
+
+  <Prose>
+    <slot />
+  </Prose>
+
+  <slot name="footer" />
+</BaseLayout>

@@ -1,0 +1,131 @@
+---
+import TechCard from "@components/cards/TechCard.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Svgs de frontend
+import svgHTML from "@assets/logos/logoHTML.svg";
+import svgCSS from "@assets/logos/logoCSS.svg";
+import svgJavascript from "@assets/logos/logoJS.svg";
+import svgTypescript from "@assets/logos/logoTypescript.svg";
+import svgSass from "@assets/logos/logoSass.svg";
+import svgTailwind from "@assets/logos/logoTailwind.svg";
+import svgAstro from "@assets/logos/logoAstro.svg";
+import svgReact from "@assets/logos/logoReact.svg";
+import svgGatsby from "@assets/logos/logoGatsby.svg";
+import svgWordpress from "@assets/logos/logoWordpress.svg";
+import svgHTMLCanvas from "@assets/logos/logoHTMLCanvas.svg";
+import svgSVG from "@assets/logos/logoSvg.svg";
+
+// Svgs de backend
+import svgGolang from "@assets/logos/logoGolang-gopher.svg";
+import svgNode from "@assets/logos/logoNode.svg";
+import svgNext from "@assets/logos/logoNext.svg";
+import svgSQL from "@assets/logos/logoSQL.svg";
+import svgPostregreSQL from "@assets/logos/logoPostgresql.svg";
+import svgMySQL from "@assets/logos/logoMySql.svg";
+import svgCloudflare from "@assets/logos/logoCloudflare.svg";
+import svgNetlify from "@assets/logos/logoNetlify.svg";
+import svgVercel from "@assets/logos/logoVercel.svg";
+
+// Svgs de UI
+import svgUI from "@assets/logos/logoUI.svg";
+import svgFigma from "@assets/logos/logoFigma.svg";
+import svgVector from "@assets/logos/logoVector.svg";
+
+// Svgs de herramientas de desarrollo
+import svgVSCode from "@assets/logos/logoVSC.svg";
+import svgPrettier from "@assets/logos/logoPrettierEslint.svg";
+import svgGit from "@assets/logos/logoGit.svg";
+import svgGithub from "@assets/logos/logoGithub.svg";
+import svgTerminal from "@assets/logos/logoGnu_bash.svg";
+import svgAsana from "@assets/logos/logoAsana.svg";
+import svgNotion from "@assets/logos/logoNotion.svg";
+import svgMarkdown from "@assets/logos/logoMarkdown.svg";
+import svgPostman from "@assets/logos/logoPostman.svg";
+---
+
+<section class="container px-4 lg:px-0 mb-16">
+  <h2
+    class="text-center font-title font-semibold text-2xl lg:text-4xl lg:text-[40px] mb-6 lg:mb-10"
+  >
+    {t("home.techs.title")}
+  </h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+    <!--Frontend -->
+    <div class="flex flex-col items-center">
+      <h3 class="w-full max-w-[368px] text-start  font-title font-semibold text-xl mb-6">
+        {t("home.techs.titleFrontend")}
+      </h3>
+
+      <div class="grid grid-cols-3 lg:grid-cols-3 gap-4">
+        <TechCard title="HTML" img={svgHTML} />
+        <TechCard title="CSS" img={svgCSS} />
+        <TechCard title="JavaScript" img={svgJavascript} />
+        <TechCard title="TypeScript" img={svgTypescript} />
+        <TechCard title="Sass" img={svgSass} />
+        <TechCard title="Tailwind CSS" img={svgTailwind} />
+        <TechCard title="Astro" img={svgAstro} />
+        <TechCard title="React" img={svgReact} />
+        <TechCard title="Gatsby" img={svgGatsby} />
+        <TechCard title="Wordpress" img={svgWordpress} />
+        <TechCard title="HTML Canvas" img={svgHTMLCanvas} />
+        <TechCard title="SVG" img={svgSVG} />
+      </div>
+    </div>
+
+    <!--Backend -->
+    <div class="flex flex-col items-center">
+      <h3 class="w-full max-w-[368px] text-start  font-title font-semibold text-xl mb-6">
+        {t("home.techs.titleBackend")}
+      </h3>
+
+      <div class="grid grid-cols-3 lg:grid-cols-3 gap-4">
+        <TechCard title="GoLang" img={svgGolang} />
+        <TechCard title="Node.js" img={svgNode} />
+        <TechCard title="Next.js" img={svgNext} />
+        <TechCard title="SQL" img={svgSQL} />
+        <TechCard title="PostgreSQL" img={svgPostregreSQL} />
+        <TechCard title="MySQL" img={svgMySQL} />
+        <TechCard title="Cloudflare" img={svgCloudflare} />
+        <TechCard title="Netlify" img={svgNetlify} />
+        <TechCard title="Vercel" img={svgVercel} />
+      </div>
+    </div>
+
+    <!-- Diseño UI -->
+    <div class="flex flex-col items-center">
+      <h3 class="w-full max-w-[368px] text-start  font-title font-semibold text-xl mb-6">
+        {t("home.techs.titleUi")}
+      </h3>
+
+      <div class="grid grid-cols-3 lg:grid-cols-3 gap-4">
+        <TechCard title="UI" img={svgUI} />
+        <TechCard title="Figma" img={svgFigma} />
+        <TechCard title="Vector" img={svgVector} />
+      </div>
+    </div>
+
+    <!-- Herramientas de desarrollo -->
+    <div class="flex flex-col items-center">
+      <h3 class="w-full max-w-[368px] text-start  font-title font-semibold text-xl mb-6">
+        {t("home.techs.titleDevelopmentTools")}
+      </h3>
+
+      <div class="grid grid-cols-3 lg:grid-cols-3 gap-4">
+        <TechCard title="VSCode" img={svgVSCode} />
+        <TechCard title="Prettier" img={svgPrettier} />
+        <TechCard title="Git" img={svgGit} />
+        <TechCard title="Github" img={svgGithub} />
+        <TechCard title="Terminal" img={svgTerminal} />
+        <TechCard title="Asana" img={svgAsana} />
+        <TechCard title="Notion" img={svgNotion} />
+        <TechCard title="Markdown" img={svgMarkdown} />
+        <TechCard title="Postman" img={svgPostman} />
+      </div>
+    </div>
+  </div>
+</section>

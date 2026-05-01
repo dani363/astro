@@ -1,0 +1,166 @@
+---
+import {
+  Bars3Icon,
+  MoonIcon,
+  SunIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import { Image } from "astro:assets";
+
+import imgWordmark from "../assets/brand/Wordmark.svg";
+import imgDarkWordmark from "../assets/brand/WordMarkDark.svg";
+
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@i18n/utils";
+import LanguagePicker from "./LanguagePicker.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<header
+  class="bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center shadow
+  z-20 fixed top w-full left-0 right-0"
+>
+  <div
+    class="container flex items-center justify-between gap-4 p-4 lg:p-0 lg:py-4 md:px-0"
+  >
+    <div class="lg:hidden">
+      <Bars3Icon
+        id="menu-icon"
+        className="text-neutral-900 dark:text-neutral-50 size-8 lg:hidden"
+      />
+      <XMarkIcon
+        id="close-icon"
+        className="text-neutral-900 dark:text-neutral-50 hidden size-8 lg:hidden"
+      />
+    </div>
+
+    <div class="flex w-full lg:w-auto">
+      <Image
+        class="place-self-start h-8 dark:hidden"
+        src={imgWordmark}
+        alt="Jonathan Bello"
+      />
+
+      <Image
+        class="place-self-start h-8 hidden dark:block"
+        src={imgDarkWordmark}
+        alt="Jonathan Bello"
+      />
+    </div>
+
+    <nav
+      id="navigator-menu"
+      class="fixed -top-full left-0 right-0 lg:top-0 lg:left-auto lg:right-auto
+      flex flex-col items-center justify-center shadow lg:shadow-none p-6 py-8 lg:p-0 lg:py-0
+      transition-[top] duration-300 ease-in-out lg:transition-none
+      lg:static lg:flex-1 lg:flex lg:items-center lg:gap-4 lg:pt-1
+      bg-neutral-50 dark:bg-neutral-950"
+      aria-label="Main navigation"
+    >
+      <ul
+        class="h-full container flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-8
+      [&>li]:text-neutral-950 dark:[&>li]:text-neutral-50 lg:[&>li]:w-28 lg:[&>li]:text-center [&>li>a]:relative
+         font-text font-medium text-xl lg:text-lg"
+      >
+        <li>
+          <a href={translatePath("/")}>{t("nav.home")}</a>
+        </li>
+        <li>
+          <a href={translatePath("/projects/")}>{t("nav.projects")}</a>
+        </li>
+        <!-- <li>
+          <a href={translatePath("/blog/")}>{t("nav.blog")}</a>
+        </li> -->
+        <li>
+          <a href={translatePath("/about/")}>{t("nav.about")}</a>
+        </li>
+        <li>
+          <a href={translatePath("/contact/")}>{t("nav.contact")}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-4 xl:w-32 2xl:w-36 justify-end">
+      <LanguagePicker />
+
+      <button
+        id="theme-toggle"
+        class="theme-toggle
+        rounded-full size-8 bg-neutral-100 dark:bg-neutral-400 hover:cursor-pointer flex items-center justify-center"
+      >
+        <MoonIcon className="text-neutral-400 size-6 dark:hidden" />
+        <SunIcon className="text-neutral-100 hidden dark:inline-block size-6" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Colocar linea color roja del link activo por debajo del link, pero en desktop colocar la linea encima del link */
+  #navigator-menu a:is(.active)::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 80%;
+    height: 2px;
+    @apply bg-primary-700 lg:w-full lg:-top-1;
+  }
+</style>
+
+<script>
+  // Verificar que el DOM este completamente cargado antes de ejecutar el script con la validacion de viewtransiottions de astro
+  // con astro-load-page
+
+  document.addEventListener("astro:page-load", () => {
+    // Toggle navigation menu
+    const barsIcon = document.querySelector("#menu-icon");
+    const closeIcon = document.querySelector("#close-icon");
+    const navigatorMenu = document.querySelector("#navigator-menu");
+    const navigatorLinks = document.querySelector("#navigator-menu ul");
+
+    if (navigatorMenu === null || barsIcon === null || closeIcon === null) {
+      throw new Error("Element not found");
+    }
+
+    barsIcon.addEventListener("click", () => {
+      barsIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+      navigatorMenu.classList.toggle("top-16");
+    });
+
+    closeIcon.addEventListener("click", () => {
+      closeIcon.classList.toggle("hidden");
+      barsIcon.classList.toggle("hidden");
+      navigatorMenu.classList.toggle("top-16");
+    });
+
+    // Agregar logoica  de que se muestre una linea roja debajo del link activo
+    // si el link concuerda con el path actual
+    const path = window.location.pathname;
+    const links = navigatorLinks?.querySelectorAll("a");
+
+    links?.forEach((link) => {
+      if (link.pathname === path) {
+        console.log(link.pathname);
+        link.classList.add("active");
+      }
+    });
+
+    // Cambiar el tema de la pagina
+    const themeToggle = document.querySelector("#theme-toggle");
+    const html = document.querySelector("html");
+
+    themeToggle?.addEventListener("click", () => {
+      html?.classList.toggle("dark");
+    });
+  });
+</script>
