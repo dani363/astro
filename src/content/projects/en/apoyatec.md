@@ -11,7 +11,7 @@ techs:
   - Scholarship API
 category: ["web"]
 url: "https://midominio.com/apoyatec"
-author: "jonathan-bello"
+author: "daniel-patino"
 isRelevant: true
 ---
 

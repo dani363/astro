@@ -11,7 +11,7 @@ techs:
   - Netlify/Vercel
 category: ["web", "ui"]
 url: "https://midominio.com/portafolio"
-author: "jonathan-bello"
+author: "daniel-patino"
 isRelevant: false
 ---
 

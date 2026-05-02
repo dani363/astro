@@ -11,7 +11,7 @@ techs:
   - Markdown
 category: "tecnologia"
 url: "https://midominio.com/blog/ia-educacion"
-author: "jonathan-bello"
+author: "daniel-patino"
 ---
 
 ## Revolución Educativa con Inteligencia Artificial

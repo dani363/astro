@@ -11,7 +11,7 @@ techs:
   - Tailwind CSS
 category: "salud"
 url: "https://midominio.com/blog/ia-salud"
-author: "jonathan-bello"
+author: "daniel-patino"
 ---
 
 ## Diagnósticos del Futuro

@@ -11,7 +11,7 @@ techs:
   - Tailwind CSS
 category: "ethics"
 url: "https://mydomain.com/blog/ai-ethics"
-author: "jonathan-bello"
+author: "daniel-patino"
 ---
 
 ## The Ethics Behind Smart Machines

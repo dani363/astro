@@ -11,7 +11,7 @@ techs:
   - IA para análisis de código
 category: ["web", "games"]
 url: "https://midominio.com/tesis"
-author: "jonathan-bello"
+author: "daniel-patino"
 isRelevant: true
 ---
 

@@ -12,7 +12,7 @@ techs:
   - SSR/SSG
 category: ["web"]
 url: "https://midominio.com/curso-astro"
-author: "jonathan-bello"
+author: "daniel-patino"
 isRelevant: true
 ---
 

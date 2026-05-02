@@ -11,7 +11,7 @@ techs:
   - Markdown
 category: "technology"
 url: "https://mydomain.com/blog/ai-education"
-author: "jonathan-bello"
+author: "daniel-patino"
 ---
 
 ## The Educational Revolution Powered by AI

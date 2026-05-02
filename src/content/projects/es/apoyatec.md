@@ -11,7 +11,7 @@ techs:
   - API de becas
 category: ["web", "backend"]
 url: "https://midominio.com/apoyatec"
-author: "jonathan-bello"
+author: "daniel-patino"
 isRelevant: true
 ---
 

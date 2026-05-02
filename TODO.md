@@ -17,3 +17,9 @@
   - scale-in, blue-pulse
   - hover-lift, hover-glow-blue
   - delay classes (100ms a 500ms)
+
+## 4. Completar cambios faltantes (TareasPendientes)
+- [x] Actualizar Header.astro - cambiar "Jonathan Bello" a "Daniel Patiño"
+- [x] Actualizar archivos de contenido - cambiar author "jonathan-bello" a "daniel-patino"
+- [x] Verificar/colorear sección de programming skills de azul (HabilityCard)
+- [ ] Agregar más animaciones a los componentes
